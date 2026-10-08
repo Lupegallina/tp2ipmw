@@ -1,66 +1,36 @@
-function boton (IsDecision, IsFinal, IsInicio, Siguiente1, Siguiente2) {
-  fill(255, 190, 245);
-  stroke(230, 98, 210);
-  strokeWeight(5);
-  if (IsInicio) {
-    rect(340, 380, 120, 50, 10);
-    noStroke();
-    textAlign(CENTER, CENTER);
-    fill(0);
-    textSize(20);
-    text("Comenzar", 400, 407);
-    if (mouseIsPressed && mouseX >= 340 && mouseX <= 460 && mouseY >= 380 && mouseY <= 430) {
-      IsTransicionando = true;
-    }
-  } else {
-    if (!IsFinal) {
-      if (!IsDecision) {
-        rect(340, 380, 120, 50, 10);
-        noStroke();
-        textAlign(CENTER, CENTER);
-        fill(0);
-        textSize(20);
-        text("Continuar", 400, 407);
-      } else if (IsDecision) {
-        rect(60, 380, 280, 50, 10);
-        rect(460, 380, 280, 50, 10);
-        noStroke();
-        textAlign(CENTER, CENTER);
-        fill(0);
-        textSize(20);
-        text("OPCION UNO", 200, 407);
-        text("OPCION DOS", 600, 407);
-      }
-    } else {
-      rect(310, 380, 180, 50, 10);
-      noStroke();
-      textAlign(CENTER, CENTER);
-      fill(0);
-      textSize(20);
-      text("Volver a empezar", 400, 407);
-    }
-  }
-}
 
-function pantalla (PNum, PString, IsDecision, Siguiente1, Siguiente2, IsFinal, IsInicio) {
+function pantalla (PNum, PString, x1, y1, ancho1, alto1, siguiente1, IsDecision, x2, y2, ancho2, alto2, siguiente2) {
+if(IsDecision && mouseX >= x2 && mouseX <= x2+ancho2 && mouseY>= y2 && mouseY<= y2+ alto2){
+  image(PArray[PNum+2], 0, 0, 800, 450);
+}else if(mouseX >= x1 && mouseX <= x1+ancho1 && mouseY>= y1 && mouseY<= y1+ alto1){
+  image(PArray[PNum+1], 0, 0, 800, 450);
+}else{
   image(PArray[PNum], 0, 0, 800, 450);
+}
   fill(255);
   textAlign(CENTER, CENTER);
   textSize(12);
   text(PString, 400, 300);
-  boton(IsDecision, IsFinal, IsInicio, Siguiente1, Siguiente2);
+  interaccion(x1, y1, ancho1, alto1, siguiente1, IsDecision, x2, y2, ancho2, alto2, siguiente2)
 }
 
 
-function interaccion(x,y,ancho,alto,siguiente){
+function interaccion(x1, y1, ancho1, alto1, siguiente1, IsDecision, x2, y2, ancho2, alto2, siguiente2){
 
   fill(255, 0, 0, 100);
   noStroke();
-  rect(x, y, ancho, alto);
+  rect(x1, y1, ancho1, alto1);
+  rect(x2, y2, ancho2, alto2);
   
-if(mouseIsPressed && mouseX >= x && mouseX <= x+ancho && mouseY>= y && mouseY<= y+ alto){
-pantallaSiguiente=siguiente;
+if(mouseIsPressed && mouseX >= x1 && mouseX <= x1+ancho1 && mouseY>= y1 && mouseY<= y1+ alto1){
+pantallaSiguiente=siguiente1;
 IsTransicionando=true;
+}
+if(IsDecision){
+if(mouseIsPressed && mouseX >= x2 && mouseX <= x2+ancho2 && mouseY>= y2 && mouseY<= y2+ alto2){
+pantallaSiguiente=siguiente2;
+IsTransicionando=true;
+}
 }
 
 }
