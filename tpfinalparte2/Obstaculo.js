@@ -9,7 +9,7 @@ class Obstaculo {
   }
   
   dibujar() {
-    /*image(this.estrella)*/
+    //image(this.estrella)
     if(!this.seRompe){
    fill(0,100,0)
     rect(this.posX,this.posY,40,40);
